@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2015/07/27/NetWorking-Penetration/" itemprop="url">
-                NetWorking Penetration
+              <a class="post-title-link" href="/2015/07/17/group/" itemprop="url">
+                group
               </a>
             
           
@@ -181,8 +181,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-07-27T19:26:22+08:00" content="2015-07-27">
-            2015-07-27
+          <time itemprop="dateCreated" datetime="2015-07-17T20:19:53+08:00" content="2015-07-17">
+            2015-07-17
           </time>
         </span>
 
@@ -201,7 +201,144 @@
 
       
         
-          <span itemprop="articleBody"></span>
+          <h2 id="gpp漏洞：">gpp漏洞：</h2><p>Group Policy Preference（windows2008有一个叫组策略首选项）<br>这个特性可以方便管理员在整个域内部署策略.而这个组策略首选项的一些缺陷.尤其是当下发的策略包含用户名和认证信息的时候,一个普通的用户就可以通过这些信息或得策略里的帐号密码,从而提升自己的权限甚至控制域内其他计算机。<br>组策略首选项允许域管理员向域内的计算机推送各种策略.比如登录的时候自动映射网络硬盘,更新内建administrator帐号的密码,修改注册表,启动程序,新建用户等等.<br>更多如何创建部署策略的细节就不多说了.下面是一条更新administrator管理员帐号的策略.如下图,是一个xml的文件.<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/17/group/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/07/17/NetWorking-Peneration-1/" itemprop="url">
+                NetWorking  Penetration 1
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-07-17T20:02:49+08:00" content="2015-07-17">
+            2015-07-17
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="提权">提权</h2><h2 id="ws2help-dll(exec_权限_系统权限_联网）">ws2help.dll(exec 权限    系统权限 联网）</h2><p>这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改<br>我分享个跟这个类似的方法：<br>程序在执行过程中很多时候会调用系统的资源<br>但是程序编译过程是不会指定明确的系统资源路径的。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/17/NetWorking-Peneration-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2015/07/16/NetWorking-Penetration/" itemprop="url">
+                NetWorking Penetration
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-07-16T19:26:22+08:00" content="2015-07-16">
+            2015-07-16
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h2 id="信息收集，探索">信息收集，探索</h2><h2 id="Pstools">Pstools</h2><p>在pstools里面包含12款工具：<br>            PsExec - 远程执行进程<br>            PsFile - 显示远程打开的文件<br>            PsGetSid - 显示计算机或用户的 SID<br>            PsInfo - 列出有关系统的信息<br>            PsKill - 按名称或进程 ID 终止进程<br>            PsList - 列出有关进程的详细信息<br>            PsLoggedOn - 查看在本地通过资源共享（包含所有资源）登录的用户<br>            PsLogList - 转储事件日志记录<br>            PsPasswd － 更改帐户密码<br>            PsService - 查看和控制服务<br>            PsShutdown - 关闭并重新启动（可选）计算机<br>            PsSuspend - 暂停进程<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/07/16/NetWorking-Penetration/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -321,7 +458,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -335,7 +472,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-count">2</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

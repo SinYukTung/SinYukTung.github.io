@@ -1,0 +1,655 @@
+<!doctype html>
+<html class="theme-next use-motion theme-next-mist">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+  <meta name="google-site-verification" content="VvyjvVXcJQa0QklHipu6pwm2PJGnnchIqX7s5JbbT_0" />
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+
+
+  <meta name="keywords" content="NetWorking Penetration," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NetWorking  Penetration 1">
+<meta property="og:url" content="http://sunsays.net/2015/07/17/NetWorking-Peneration-1/index.html">
+<meta property="og:site_name" content="SunSays thinking">
+<meta property="og:description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
+<meta property="og:updated_time" content="2015-07-27T12:19:11.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NetWorking  Penetration 1">
+<meta name="twitter:description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> NetWorking  Penetration 1 // SunSays thinking </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?50c15455e37f70aea674ff4a663eef27";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">SunSays thinking</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            关于
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              NetWorking  Penetration 1
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          发表于
+          <time itemprop="dateCreated" datetime="2015-07-17T20:02:49+08:00" content="2015-07-17">
+            2015-07-17
+          </time>
+        </span>
+
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="提权">提权</h2><h2 id="ws2help-dll(exec_权限_系统权限_联网）">ws2help.dll(exec 权限    系统权限 联网）</h2><p>这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改<br>我分享个跟这个类似的方法：<br>程序在执行过程中很多时候会调用系统的资源<br>但是程序编译过程是不会指定明确的系统资源路径的。<br><a id="more"></a><br>比如联网的程序 启动的时候 需要加载系统目录下的 ws2help.dll。<br>但是程序加载的时候并不知道这个dll的位置，<br>他启动的顺序是先搜索本目录，然后搜索系统目录，<br>最后在系统目录找到这个 ws2help.dll<br>你只需要编译个你需要的功能的dll 改名字成 ws2help.dll 放进需要网络应用的程序根目录里面，<br>管理员或者其他服务，去启动这个程序的时候，就会加载。<br>之前有篇文章说，利用替换搜狗的自动升级策程序运行鸽子，跟这个也是差不多的道理啊！<br>使用方法： 将此文件放入需要网络应用的程序根目录里，程序启动的时候会加载此文件，自动创建系统管理员用户 wlozz 密码为 wlozz<br>修改用户密码将此文件载入 c32，搜索字符串 wlozz 自行修改</p>
+<h2 id="lpk-dll_提权_（_高权限用户运行）">lpk.dll  提权  （ 高权限用户运行）</h2><p>将此DLL文件放入服务器存在EXE的目录中，重启后（可以攻击导致重启，其他方法也行，就是让系统再次运行此目录的任何一个EXE就行）<br>比如放在c:\php\目录下，下次重启后就会在服务器中添加用户bmd,密码为cunzhang的管理员帐号<br>(网上已经存在了，不过没有测试成功，此款测试成功，大家可以自己测试附件压缩包为测试用的EXE，点击TEST.EXE，然后关闭就会添加用户BMD，也可以在同目录运行其他EXE测试)<br>也有人说这东西08年的时候就被玩烂了。微软10年10月出了补丁，如果这个能用，还不如用pr<br>————————————————————————————<br>这个要比最近爆出来的usp10.dll提权感觉还要牛x点。<br>程序执行会到系统目录找到lpk.dll加载<br>按照xx的顺序 程序当前目录优先加载<br>于是把这个lpk.dll放到exe的程序目录<br>exe运行的时候我们这个lpk.dll就会被加载<br>提权的时候找一个系统权限下启动的exe程序的目录<br>把这个lpk.dll丢到里面就行<br>然后当exe执行的时候这个lpk就会被加载来添加一个用户</p>
+<p>测试方法：<br>将lpk.dll放到任意目录<br>执行当前目录里的任意exe(最好是第三方程序)<br>系统就会添加一个账号<br>装了360的机器可能测试失败<br>本来打算多方面考虑一下发一个完全版的<br>比如寻找系统用户组什么的<br>防止被人说卖关子<br>虽然不成熟也丢出来<br>这样就只能默认administrators管理组了<br>反正当前的功能就是添加一个用户名为3est的用户并将这个用户添加到administrators组<br>为了方便大家记忆<br>被加载后添加的用户名密码分别是<br>user：3est<br>pass：m0r5Mjj$</p>
+<h2 id="get_hash">get hash</h2><h2 id="1-_dump_ntds-dit_附件内NTDSDump-exe是导出工具，其命令行如下：">1.    dump ntds.dit  附件内NTDSDump.exe是导出工具，其命令行如下：</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">2.	</span>ntdsdump.exe <span class="xml"><span class="tag">&lt;<span class="title">-f</span> <span class="attribute">ntds.dit</span>&gt;</span></span> <span class="xml"><span class="tag">&lt;<span class="title">-k</span> <span class="attribute">HEX-SYS-KEY</span> | <span class="attribute">-s</span> <span class="attribute">system.hiv</span>&gt;</span></span> [-o out.txt] [-h] [-t JOHN|LC]</span><br><span class="line"><span class="bullet">3.	</span>-f    ntds.dit路径</span><br><span class="line"><span class="bullet">4.	</span>-k   可选的十六进制格式的SYSKEY</span><br><span class="line"><span class="bullet">5.	</span>-s    可选的system.hiv路径</span><br><span class="line"><span class="bullet">6.	</span>-h   导出历史密码记录</span><br><span class="line"><span class="bullet">7.	</span>-t    导出格式，LC或JOHN</span><br><span class="line"><span class="bullet">8.	</span>-o   导出到指定文件</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-_Quarks_PwDump">2.2. Quarks PwDump</h2><p>是一款开放源代码的Windows用户凭据提取工具，它可以抓取windows平台下多种类型的用户凭据，包括：本地帐户、域帐户、缓存的域帐户和Bitlocker。<br>作者开发这个工具的原因是现在没有一款工具能同时抓取所有类型的hash和Bitlocker信息。这个工具没有注入任何进程，工作原理是神马呢，源代码值得读一下。<br>它目前可以导出 :<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">– Local accounts NT/LM hashes + <span class="built_in">history</span> 本机NT/LM哈希+历史登录记录</span><br><span class="line">– Domain accounts NT/LM hashes + <span class="built_in">history</span> 域中的NT/LM哈希+历史登录记录</span><br><span class="line">– Cached domain password 缓存中的域管理密码</span><br><span class="line">– Bitlocker recovery information (recovery passwords &amp; key packages) 使用Bitlocker的恢复后遗留的信息</span><br></pre></td></tr></table></figure></p>
+<p>支持的操作系统 :<code>XP/2003/Vista/7/2008/8</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1 / USAGE</span><br><span class="line">=========</span><br><span class="line">Here it is how you can <span class="operator"><span class="keyword">use</span> Quarks PWDump:</span><br><span class="line">quarks-pwdump.exe&lt;<span class="keyword">option</span>(s)&gt;</span><br><span class="line">Options :</span><br><span class="line">–dump-hash-<span class="keyword">local</span></span><br><span class="line">–dump-hash-<span class="keyword">domain</span>-cached</span><br><span class="line">–dump-hash-<span class="keyword">domain</span> (NTDS_FILE must be specified)</span><br><span class="line">–dump-bitlocker (NTDS_FILE must be specified)</span><br><span class="line">–<span class="keyword">with</span>-history (optional)</span><br><span class="line">–<span class="keyword">output</span>-type JOHN/LC (optional, <span class="keyword">if</span> <span class="keyword">no</span>=&gt;JOHN)</span><br><span class="line">–<span class="keyword">output</span> FILE (optional, <span class="keyword">if</span> <span class="keyword">no</span>=&gt;stdout)</span><br><span class="line">Dump options must be <span class="keyword">user</span> <span class="keyword">all</span> <span class="keyword">at</span> once.</span><br><span class="line"><span class="keyword">In</span> <span class="keyword">all</span> cases, the tool must be executed <span class="keyword">on</span> the targeted operating system.</span><br><span class="line"><span class="keyword">Some</span> command examples:</span><br><span class="line">– Dump <span class="keyword">domain</span> hashes <span class="keyword">from</span> NTDS.dit <span class="keyword">with</span> its history</span><br><span class="line">#quarks-pwdump.exe –dump-hash-<span class="keyword">domain</span> –<span class="keyword">with</span>-history</span><br><span class="line">– Dump <span class="keyword">local</span> account hashes <span class="keyword">to</span> LC <span class="keyword">format</span></span><br><span class="line">#quarks-pwdump.exe –dump-hash-<span class="keyword">local</span> –<span class="keyword">output</span>-type LC</span><br><span class="line">– Dump <span class="keyword">domain</span> hashes <span class="keyword">from</span> NTDS.dit <span class="keyword">with</span> its history</span><br><span class="line">#quarks-pwdump.exe –dump-bitlocker –<span class="keyword">output</span> c:bitlocker.txt c:ntds.dit</span><br><span class="line"><span class="keyword">All</span> features require administrator <span class="keyword">privileges</span>.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-_wce">3. wce</h2><p>是与gethashes 和mimikatz齐名的一款hash管理工具, ce的使用说明如下<br>参数解释:<br>-l          列出登录的会话和NTLM凭据（默认值）<br>-s               修改当前登录会话的NTLM凭据 参数：&lt;用户名&gt;:&lt;域名&gt;:<lm哈希>:<nt哈希><br>-r                不定期的列出登录的会话和NTLM凭据，如果找到新的会话，那么每5秒重新列出一次<br>-c               用一个特殊的NTML凭据运行一个新的会话 参数：<cmd><br>-e               不定期的列出登录的会话和NTLM凭据，当产生一个登录事件的时候重新列出一次<br>-o               保存所有的输出到一个文件 参数:&lt;文件名&gt;<br>-i                指定一个LUID代替使用当前登录会话 参数:<luid><br>-d               从登录会话中删除NTLM凭据 参数:<luid><br>-a               使用地址 参数: &lt;地址&gt;<br>-f                强制使用安全模式<br>-g               生成LM和NT的哈希 参数&lt;密码&gt;<br>-K               缓存kerberos票据到一个文件（unix和windows wce格式）<br>-k               从一个文件中读取kerberos票据并插入到windows缓存中<br>-w              通过摘要式认证缓存一个明文的密码<br>-v               详细输出<br>在上面的使用说明中可以看到，-s参数可以用来hash注入。<br>hash注入的原理是将我们预备好的目标机器的本地或者是域用户hash注入到本地的认证进程lsass.exe中去，使得本地在使用ipc登录目标机器的时候就如同自己登录自己的机器一样获得权限。至于目标机器的本地或者是域用户hash如何取得那就要发挥你自己的想象力了。hash注入本身是为了对付那些破解不了的NTHASH。<br>具体的命令格式如下：<br>wce.exe -s 用户名:对方机器名或者ip:LM-HASH:NT-HASH<br>当提示注入成功的时候，这时候键入net use命令并没有看到有连接，其实已经可以连接了，直接使用ipc命令操作对方的机器就可以了，如上图。</luid></luid></cmd></nt哈希></lm哈希></p>
+<p>其次域里的域用户hash也可以使用wce进行注入，只需要把命令格式变一变就行<br>wce.exe -s 用户名:域名:LM-HASH:NT-HASH<br>同样的方法不再赘述。</p>
+<h2 id="4-_mimikatz">4. mimikatz</h2><p>2.0版本的只需要两条命令就可以了，比以前版本的更简单了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一条：privilege::debug</span><br><span class="line">                <span class="comment">//提升权限</span></span><br><span class="line">第二条：sekurlsa::logonpasswords</span><br><span class="line">              <span class="comment">//抓取密码</span></span><br></pre></td></tr></table></figure></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NetWorking-Penetration/" rel="tag">#NetWorking Penetration</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/17/group/" rel="prev">group</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/16/NetWorking-Penetration/" rel="next">NetWorking Penetration</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_tqq"></a>
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_cqq"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_renren"></a>
+  <a class="jiathis_button_qzone"></a>
+  <a class="jiathis_button_kaixin001"></a>
+  <a class="jiathis_button_copy"></a>
+  <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+  var jiathis_config={
+    hideMore:false
+  }
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="images/avatar.jpg" alt="SXD" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">SXD</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description"></p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">0</span>
+              <span class="site-state-item-name">分类</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">GitHub</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">Twitter</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">Weibo</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">DouBan</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="" target="_blank">ZhiHu</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="http://creativecommons.org/licenses/by-nc-sa/4.0" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons" />
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            <p class="site-author-name">Links</p>
+            
+              <span class="links-of-author-item">
+              <a href="http://bbs.pediy.com/" target="_blank">看雪</a>
+              </span>
+            
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#提权"><span class="nav-number">1.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ws2help-dll(exec_权限_系统权限_联网）"><span class="nav-number">2.</span> <span class="nav-text">ws2help.dll(exec 权限    系统权限 联网）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lpk-dll_提权_（_高权限用户运行）"><span class="nav-number">3.</span> <span class="nav-text">lpk.dll  提权  （ 高权限用户运行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get_hash"><span class="nav-number">4.</span> <span class="nav-text">get hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_dump_ntds-dit_附件内NTDSDump-exe是导出工具，其命令行如下："><span class="nav-number">5.</span> <span class="nav-text">1.    dump ntds.dit  附件内NTDSDump.exe是导出工具，其命令行如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-_Quarks_PwDump"><span class="nav-number">6.</span> <span class="nav-text">2.2. Quarks PwDump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_wce"><span class="nav-number">7.</span> <span class="nav-text">3. wce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_mimikatz"><span class="nav-number">8.</span> <span class="nav-text">4. mimikatz</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp;  2012 - 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">SXD</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 0.4 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    var $tocContent = $('.post-toc-content');
+    if (isDesktop() && CONFIG.sidebar === 'post') {
+      if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+        displaySidebar();
+      }
+    }
+  });
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
