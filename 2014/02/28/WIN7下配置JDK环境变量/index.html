@@ -37,19 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。
-1.下载JDK下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html在这个下载页面可以看到windows有两个版本的JDK：Windows x8689.09 MBWin">
+<meta name="description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WIN7下配置JDK环境变量">
 <meta property="og:url" content="http://sunsays.net/2014/02/28/WIN7下配置JDK环境变量/index.html">
 <meta property="og:site_name" content="SunSays thinking">
-<meta property="og:description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。
-1.下载JDK下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html在这个下载页面可以看到windows有两个版本的JDK：Windows x8689.09 MBWin">
-<meta property="og:updated_time" content="2015-07-27T12:48:46.190Z">
+<meta property="og:description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。">
+<meta property="og:updated_time" content="2015-07-27T13:00:57.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WIN7下配置JDK环境变量">
-<meta name="twitter:description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。
-1.下载JDK下载地址：http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html在这个下载页面可以看到windows有两个版本的JDK：Windows x8689.09 MBWin">
+<meta name="twitter:description" content="最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -200,7 +197,7 @@
       
 
       
-        <span itemprop="articleBody"><p>最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。</p>
+        <span itemprop="articleBody"><p>最近想自学Android，于是下了个JDK，下面是在安装过程中遇到的一些问题，防止以后忘记，所以整理了一下。<br><a id="more"></a></p>
 <h2 id="1-下载JDK">1.下载JDK</h2><p>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html</a><br>在这个下载页面可以看到windows有两个版本的JDK：<br>Windows x8689.09 MB<br>Windows x6490.66 MB<br>x86是32位操作系统，x64是64位的操作系统。<br>       我的电脑是64位win7系统，所以我下载的版本是 jdk-7u51-windows-x64.exe下载完成后，安装 。<br>       在网上看到了JRE和JDK的区别，虽然不是太理解但是想先记在这里：<br>       JRE为Java Runtime Environment的简称，JavaRuntimeEnvironment(JRE)是可以在其上运行、测试和传输应用程序的Java平台。它包括Java虚拟机、Java核心类库和支持文件。它不包含开发工具—编译器、调试器和其它工具。JRE需要辅助软件—Java Plug-in—以便在浏览器中运行applet。<br>       JDK（Java Development Kit）是Sun Microsystems针对Java开发员的产品。自从Java推出以来，JDK已经成为使用最广泛的Java SDK。JDK 是整个Java的核心，包括了Java运行环境、Java工具和Java基础类库。       </p>
 <h2 id="2-环境变量的配置">2.环境变量的配置</h2><p>1.右击“我的电脑”，点击“属性”：选择“高级系统设置”选项卡，点击“环境变量”： 　　<br>2.在“系统变量”中，设置3项系统变量，JAVA_HOME,PATH,CLASSPATH （注：“系统变量”对所有用户有用，而“用户变量”则只对当前登陆用户有用。对于变量的大小写，是不进行区分的。）<br>3.因为是默认安装，所以JDK1.7是安装在C:\Program Files\Java\jdk1.7.0_25里了。现在为三个变量设值； </p>
 <p>新建 JAVA_HOME    设值  C:\Program Files\Java\jdk1.7.0_25</p>
