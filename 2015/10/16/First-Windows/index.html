@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="windows编程," />
+  <meta name="keywords" content="Windows SDK," />
 
 
 
@@ -37,16 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description" content="这些天在写一个进程查看器的东西，遇到了令牌，SACL之类的，记下相关使用。">
+<meta name="description" content="看了看博客内容太少了，随便发发自己以前学习SDK编程写的系列代码。可以做win32的初始模板程序，在上面加一些自己想加的功能都可以。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Windows令牌相关">
-<meta property="og:url" content="sunsays.net/2015/07/23/Windows令牌相关/index.html">
+<meta property="og:title" content="First Windows">
+<meta property="og:url" content="sunsays.net/2015/10/16/First-Windows/index.html">
 <meta property="og:site_name" content="SunSays">
-<meta property="og:description" content="这些天在写一个进程查看器的东西，遇到了令牌，SACL之类的，记下相关使用。">
-<meta property="og:updated_time" content="2015-07-30T10:46:52.000Z">
+<meta property="og:description" content="看了看博客内容太少了，随便发发自己以前学习SDK编程写的系列代码。可以做win32的初始模板程序，在上面加一些自己想加的功能都可以。">
+<meta property="og:updated_time" content="2015-10-16T11:20:14.357Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Windows令牌相关">
-<meta name="twitter:description" content="这些天在写一个进程查看器的东西，遇到了令牌，SACL之类的，记下相关使用。">
+<meta name="twitter:title" content="First Windows">
+<meta name="twitter:description" content="看了看博客内容太少了，随便发发自己以前学习SDK编程写的系列代码。可以做win32的初始模板程序，在上面加一些自己想加的功能都可以。">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +56,7 @@
   };
 </script>
 
-    <title> Windows令牌相关 // SunSays </title>
+    <title> First Windows // SunSays </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -169,7 +169,7 @@
           
           
             
-              Windows令牌相关
+              First Windows
             
           
         </h1>
@@ -178,8 +178,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-07-23T18:22:32+08:00" content="2015-07-23">
-            2015-07-23
+          <time itemprop="dateCreated" datetime="2015-10-16T19:15:34+08:00" content="2015-10-16">
+            2015-10-16
           </time>
         </span>
 
@@ -197,11 +197,8 @@
       
 
       
-        <span itemprop="articleBody"><p>这些天在写一个进程查看器的东西，遇到了令牌，SACL之类的，记下相关使用。<br><a id="more"></a><br>一.OpenProcessToken<br>首先打开进程访问令牌<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">WINADVAPI</span><br><span class="line">BOOL</span><br><span class="line">WINAPI</span><br><span class="line"><span class="title">OpenProcessToken</span> <span class="params">(</span><br><span class="line">    __in        HANDLE ProcessHandle,</span><br><span class="line">    __in        DWORD DesiredAccess,</span><br><span class="line">    __deref_out PHANDLE TokenHandle</span><br><span class="line">    )</span></span>;</span><br></pre></td></tr></table></figure></p>
-<p>二.GetTokenInformation<br>获取令牌特定权限信息<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">WINADVAPI</span><br><span class="line">BOOL</span><br><span class="line">WINAPI</span><br><span class="line"><span class="title">GetTokenInformation</span> <span class="params">(</span><br><span class="line">    __in      HANDLE TokenHandle,</span><br><span class="line">    __in      TOKEN_INFORMATION_CLASS TokenInformationClass,</span><br><span class="line">    __out_bcount_part_opt(TokenInformationLength, *ReturnLength)</span> LPVOID TokenInformation,</span><br><span class="line">    __in      DWORD TokenInformationLength,</span><br><span class="line">    __out     PDWORD ReturnLength</span><br><span class="line">    )</span>;</span><br></pre></td></tr></table></figure></p>
-<p>一个例子<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">GetElevationType</span><span class="params">(HANDLE hProcess, TOKEN_ELEVATION_TYPE* pElevationType)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    HANDLE hToken = NULL;</span><br><span class="line">    <span class="comment">// Get current process token  </span></span><br><span class="line">    <span class="keyword">if</span> (!OpenProcessToken(hProcess, TOKEN_QUERY, &amp;hToken))</span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line"></span><br><span class="line">    BOOL bResult = FALSE;</span><br><span class="line">    DWORD dwSize = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// Retrieve elevation type information </span></span><br><span class="line">    BOOL bFlag = GetTokenInformation(hToken, TokenElevationType, pElevationType, <span class="keyword">sizeof</span>(TOKEN_ELEVATION_TYPE), &amp;dwSize);</span><br><span class="line">    CloseHandle(hToken);</span><br><span class="line">    <span class="keyword">return</span> bFlag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>三.IsUserAnAdmin函数<br>判断当前用户是否属于Administrator组，其是对CheckTokenMembership的封装</p>
-<p>A SID allocated with the AllocateAndInitializeSid function must be freed by using the FreeSid function.<br>四.检索进程特权信息等<br>我用一段代码示例来演示如何使用GetTokenInformation函数检索进程的所有特权信息<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> PTOKEN_GROUPS <span class="title">GetProcessGroups</span><span class="params">(HANDLE hProcess)</span></span><br><span class="line"></span>&#123;</span><br><span class="line"> HANDLE hToken;</span><br><span class="line">  PTOKEN_GROUPS pGroups = NULL;</span><br><span class="line">   DWORD neededSize;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 这里会先获得一个进程访问令牌的句柄, 并且只允许该句柄具有信息查询的权限.</span></span><br><span class="line">        <span class="keyword">if</span> (!OpenProcessToken(hProcess, TOKEN_QUERY, &amp;hToken))</span><br><span class="line">          <span class="keyword">return</span> NULL;</span><br><span class="line">    </span><br><span class="line">        <span class="comment">// 这里第一次调用GetTokenInformation是为了获取令牌信息需要的缓冲区的大小,</span></span><br><span class="line">        <span class="comment">// 这是在使用Win32 API中的一个常用做法, 很多Win32 API都可以这样使用, 目的</span></span><br><span class="line">       <span class="comment">// 是不用让程序员总是创建一个假设一定足够的缓冲区, 这在很多时候会造成空间上的浪费</span></span><br><span class="line">     neededSize = <span class="number">0</span>;</span><br><span class="line"> GetTokenInformation(hToken, TokenGroups, NULL, neededSize, &amp;neededSize);</span><br><span class="line">        <span class="keyword">if</span> (GetLastError() == ERROR_INSUFFICIENT_BUFFER &amp;&amp; neededSize &gt; <span class="number">0</span>)</span><br><span class="line">      &#123;</span><br><span class="line">               pGroups = HeapAlloc(GetProcessHeap(), <span class="number">0</span>, neededSize);</span><br><span class="line">           <span class="keyword">if</span> (pGroups != NULL)</span><br><span class="line">            &#123;</span><br><span class="line">                       <span class="comment">// 这里是真正去检索特权信息, 并且检查成功或失败.</span></span><br><span class="line">                     <span class="keyword">if</span> (!GetTokenInformation(hToken, TokenGroups, pGroups, neededSize, &amp;neededSize))</span><br><span class="line">                        &#123;</span><br><span class="line">                               HeapFree(GetProcessHeap(), <span class="number">0</span>, pGroups);</span><br><span class="line">                         pGroups = NULL;</span><br><span class="line">                 &#125;</span><br><span class="line">               &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       CloseHandle(hToken);</span><br><span class="line">    <span class="keyword">return</span> pGroups;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <span itemprop="articleBody"><p>看了看博客内容太少了，随便发发自己以前学习SDK编程写的系列代码。可以做win32的初始模板程序，在上面加一些自己想加的功能都可以。<br><a id="more"></a></p>
+<h2 id="第一个窗体程序">第一个窗体程序</h2><p>注释就不写了 能看懂的自然看得懂。。。<br><figure class="highlight"><figcaption><span>c++</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/*&#10;    Template of windows &#10;&#9;   by   sxd&#10;*/&#10;#include &#60;windows.h&#62;&#10;#include &#60;tchar.h&#62;&#10;&#10;LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);&#10;int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,&#10;&#9;_In_opt_ HINSTANCE hPrevInstance,&#10;&#9;_In_ LPTSTR lpCmdLine,&#10;&#9;_In_ int nShowCmd)&#10;&#123;&#10;&#9;static    TCHAR szAppName[] = _T(&#34; My window template &#34;);&#10;&#9;HWND      hwnd;&#10;&#9;MSG       msg;&#10;&#9;WNDCLASS  wndclass;&#10;&#10;&#9;wndclass.style                      = CS_VREDRAW | CS_HREDRAW;&#10;&#9;wndclass.lpfnWndProc                = WndProc;&#10;&#9;wndclass.cbClsExtra                 = 0;&#10;&#9;wndclass.cbWndExtra                 = 0;&#10;&#9;wndclass.hInstance                  = hInstance;&#10;&#9;wndclass.hIcon                      = LoadIcon(NULL,IDI_APPLICATION);&#10;&#9;wndclass.hCursor                    = LoadCursor(NULL,IDC_ARROW);&#10;&#9;wndclass.hbrBackground              = (HBRUSH)GetStockObject(WHITE_BRUSH);&#10;&#9;wndclass.lpszMenuName               = NULL;  &#10;&#9;wndclass.lpszClassName              = szAppName;&#10;&#10;&#9;if (!RegisterClass(&#38;wndclass))&#10;&#9;&#123;&#10;&#9;&#9;MessageBox(NULL, _T(&#34;please NT&#34;), _T(&#34;ERROR&#34;), MB_OK);&#10;&#9;&#9;return 0;&#10;&#9;&#125;&#10;&#10;&#9;hwnd = CreateWindow(szAppName,&#10;&#9;&#9;_T(&#34;Template&#34;),&#10;&#9;&#9;WS_OVERLAPPEDWINDOW,&#10;&#9;&#9;CW_USEDEFAULT,&#10;&#9;&#9;CW_USEDEFAULT,&#10;&#9;&#9;CW_USEDEFAULT,&#10;&#9;&#9;CW_USEDEFAULT,&#10;&#9;&#9;NULL,&#10;&#9;&#9;NULL,&#10;&#9;&#9;hInstance,&#10;&#9;&#9;NULL);&#10;&#9;ShowWindow(hwnd,nShowCmd);&#10;&#9;UpdateWindow(hwnd);&#10;&#10;&#9;while(GetMessage(&#38;msg, NULL, 0, 0))&#10;&#9;&#123;&#10;&#9;&#9;TranslateMessage(&#38;msg);&#10;&#9;&#9;DispatchMessage(&#38;msg);&#10;&#9;&#125;&#10;&#9;return msg.wParam;&#10;&#125;      &#10;&#10;LRESULT CALLBACK WndProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)&#10;&#123;&#10;&#9;HDC              hdc;&#10;&#9;RECT             rect;&#10;&#9;PAINTSTRUCT      ps;&#10;&#10;&#9;switch (message)&#10;&#9;&#123;&#10;&#9;case WM_CLOSE:&#10;&#9;&#9;if (MessageBox(NULL, _T(&#34;Are you sure?&#34;), _T(&#34;Ensure&#34;), MB_YESNO) == IDNO)&#10;&#9;&#9;&#9;return 0;&#10;&#9;&#9;else&#10;&#9;&#9;&#9;DestroyWindow(hwnd);&#10;&#9;&#9;return 0;&#10;&#9;case WM_PAINT:&#10;&#9;&#9;hdc  = BeginPaint(hwnd, &#38;ps);&#10;&#9;    GetClientRect(hwnd,&#38;rect);&#10;&#9;&#9;DrawText(hdc, _T(&#34;first&#34;), -1, &#38;rect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);&#10;&#9;&#9;EndPaint(hwnd,&#38;ps);&#10;&#9;&#9;return 0;&#10;&#9;case WM_DESTROY:&#10;&#9;&#9;PostQuitMessage(0);&#10;&#9;&#9;return 0;&#10;&#9;&#125;&#10;&#10;&#9;return DefWindowProc(hwnd,message,wParam,lParam);&#10;&#125;</span><br></pre></td></tr></table></figure></p>
 </span>
       
     </div>
@@ -210,7 +207,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/windows编程/" rel="tag">#windows编程</a>
+            <a href="/tags/Windows-SDK/" rel="tag">#Windows SDK</a>
           
         </div>
       
@@ -219,13 +216,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/03/My-备忘/" rel="prev">My 备忘</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/07/22/物理层/" rel="next">物理层</a>
+              <a href="/2015/10/15/Java-work/" rel="next">Java work</a>
             
           </div>
         </div>
@@ -388,7 +383,7 @@
           <div class="post-toc">
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一个窗体程序"><span class="nav-number">1.</span> <span class="nav-text">第一个窗体程序</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator"></div>
