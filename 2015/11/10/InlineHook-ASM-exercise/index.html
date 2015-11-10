@@ -28,7 +28,7 @@
 
 
 
-  <meta name="keywords" content="生活感悟," />
+  <meta name="keywords" content="Win32 ASM," />
 
 
 
@@ -37,16 +37,16 @@
   <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
 
 
-<meta name="description" content="该从哪说起呢?其实这本书也只是在暑假抽空读的,而一读完我就想急切地说点什么,关乎自己,关乎周遭, 也关乎一些自己一直以来对不同性格的人的一些想法。其实这么久以来,在我脑海里常常涌现的一个错觉就是:">
+<meta name="description" content="InlineHook 简单来说就是在要hook的函数开头强制改变程序执行流程，让它先去执行我的自定义函数，再判断需要干什么事情。常见的是嵌入jmp指令来改变执行流程。而此例子是使用push 地址 ret来改变执行流程。可以免去计算偏移量。。。不过建议使用jmp来，不然有可能增加手动重定位的麻烦…..代码如下：&amp;lt;—!more—&amp;gt;1&amp;#39318;&amp;#20808;&amp;#24471;&amp;#210">
 <meta property="og:type" content="article">
-<meta property="og:title" content="I'm not outgoing">
-<meta property="og:url" content="sunsays.net/2015/09/04/I-m-not-outgoing/index.html">
+<meta property="og:title" content="InlineHook ASM exercise">
+<meta property="og:url" content="sunsays.net/2015/11/10/InlineHook-ASM-exercise/index.html">
 <meta property="og:site_name" content="SunSays">
-<meta property="og:description" content="该从哪说起呢?其实这本书也只是在暑假抽空读的,而一读完我就想急切地说点什么,关乎自己,关乎周遭, 也关乎一些自己一直以来对不同性格的人的一些想法。其实这么久以来,在我脑海里常常涌现的一个错觉就是:">
-<meta property="og:updated_time" content="2015-10-19T11:25:08.966Z">
+<meta property="og:description" content="InlineHook 简单来说就是在要hook的函数开头强制改变程序执行流程，让它先去执行我的自定义函数，再判断需要干什么事情。常见的是嵌入jmp指令来改变执行流程。而此例子是使用push 地址 ret来改变执行流程。可以免去计算偏移量。。。不过建议使用jmp来，不然有可能增加手动重定位的麻烦…..代码如下：&amp;lt;—!more—&amp;gt;1&amp;#39318;&amp;#20808;&amp;#24471;&amp;#210">
+<meta property="og:updated_time" content="2015-11-10T11:26:04.136Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="I'm not outgoing">
-<meta name="twitter:description" content="该从哪说起呢?其实这本书也只是在暑假抽空读的,而一读完我就想急切地说点什么,关乎自己,关乎周遭, 也关乎一些自己一直以来对不同性格的人的一些想法。其实这么久以来,在我脑海里常常涌现的一个错觉就是:">
+<meta name="twitter:title" content="InlineHook ASM exercise">
+<meta name="twitter:description" content="InlineHook 简单来说就是在要hook的函数开头强制改变程序执行流程，让它先去执行我的自定义函数，再判断需要干什么事情。常见的是嵌入jmp指令来改变执行流程。而此例子是使用push 地址 ret来改变执行流程。可以免去计算偏移量。。。不过建议使用jmp来，不然有可能增加手动重定位的麻烦…..代码如下：&amp;lt;—!more—&amp;gt;1&amp;#39318;&amp;#20808;&amp;#24471;&amp;#210">
 
 
 <script type="text/javascript" id="hexo.configuration">
@@ -56,7 +56,7 @@
   };
 </script>
 
-    <title> I'm not outgoing // SunSays </title>
+    <title> InlineHook ASM exercise // SunSays </title>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 <!--[if lte IE 8]>
@@ -169,7 +169,7 @@
           
           
             
-              I'm not outgoing
+              InlineHook ASM exercise
             
           
         </h1>
@@ -178,8 +178,8 @@
       <div class="post-meta">
         <span class="post-time">
           发表于
-          <time itemprop="dateCreated" datetime="2015-09-04T19:23:50+08:00" content="2015-09-04">
-            2015-09-04
+          <time itemprop="dateCreated" datetime="2015-11-10T18:23:56+08:00" content="2015-11-10">
+            2015-11-10
           </time>
         </span>
 
@@ -197,26 +197,8 @@
       
 
       
-        <span itemprop="articleBody"><p>该从哪说起呢?其实这本书也只是在暑假抽空读的,而一读完我就想急切地说点什么,关乎自己,关乎周遭, 也关乎一些自己一直以来对不同性格的人的一些想法。<br>其实这么久以来,在我脑海里常常涌现的一个错觉就是:<br><a id="more"></a></p>
-<p>我是一个神秘的人,沉默寡言、深沉、不喜欢抛头露面。</p>
-<p>这是一个很赞的想法,至少在我看来是的。往往一些曾经不如意又不喜说话的人是善于心理安慰的,尤其是对自己,他们会很好地保护自己不受伤害。他们也往往很喜欢被认可,却又会因为各方的关注而感压力太大。 更多的时候,他们喜欢自己独处,或者只是想安静地待一会儿。这样很安全。</p>
-<p>我是一个性格内向的人,从小就是。</p>
-<p>而就是因为内向,我从小就被父母数落我的性格,他们甚至周围的其他的人都一致地认为内向是很不好的, 这的确在当时我是切身体会到的。从小跟周围的小伙伴们一起参加外界的活动时我就会感到压力很大, 就像一条离水之鱼,其实到现在也是这样的,只不过能稍微适应些。所以我常常觉得自己是生活在一种对反思和独处持否定态度的文化中,而外向就被人们理所当然地认为是健康发展的自然结果。</p>
-<p>一直以来,我没少被多少人说过他们感觉我常常闷闷不乐。</p>
-<p>何为乐?其实以前我觉得只要他们不排斥内向个性的人我就很开心了。曾经看到过这样一句话:</p>
-<p>快乐需要拥有三种特质:自尊, 乐观和外向。</p>
-<p>显然,这种说法简直是把性格内向的人掐死在胡同里。我只是觉得不同的人有不同的方式描述他们的快乐, 父母经常就因为我常嘟着嘴、常常不说话闷在心里就觉得我心情很不好,然后就拿琐事来纷扰我所做的事。 可是这样往往适得其反。我想大部分这种错误的想法都是站在不属于性格内向人的角度去考虑一个性格内向的人。而的确是有这样一句显着描述两种性格的话:</p>
-<p>内向和外向处于能量连续体的相反的两端。我们落入那连续体的什么位置就决定了我们获得自己生活精力的方式。处于连续体的偏内向那一端的人倾向于向内以获得精力。而处于连续体的偏外向那一端的人倾向于向外获得精力。</p>
-<p>其实我的理解是把一些情绪包括快乐也置于精力中。至少我觉得我是需要独处来慢慢获得精力的。不过这样导致的不同的生活状态会比较大程度的左右到性格内向的人。也是因为这到现在我甚至其实还有点不满自己内向的性格,因为我总是拿自己跟一些外向的人比,很多时候我觉得自己这样是在犯一个很大的错。而这本书 ,很多时候话语间能让或许是你认为的羞耻消散。</p>
-<p>安静的人们常常具有深刻的洞察力, 浅浅的溪流或河水奔流迅速, 较深的水域似乎比较平静。</p>
-<p>到现在以来我接触过许多性格内向的人,对一个问题就像书中所说的一样,一定要知根知底才肯罢休 。这是确实存在的,就在我认为,如果不是彻底地去弄清楚,我就会觉得很心烦,脾气躁乱,我会觉得大脑有一部分是空白的,这种体验让人觉得很没安全感。</p>
-<p>其实大多时候像我这样性格内向的人比较拘谨,欣赏一种较简单的生活方式,有亲密的依恋,以新的方式来计划和思考如何去做一件事,倾向于鼓励别人谨慎小心,自我反思,并且在行动前认真思考。相反,正如书中所比喻的一样,外向的人就像有着高新奇的探求者,喜爱奇特而动人的旅行以及任何新鲜的事物,他们容易冲动 ,易敏感波动情绪,非常健谈并擅长说服别人,他们倾向于丰富多彩并想将极限推到新的高度。</p>
-<p>在追求感觉良好这一点上,两者没有什么不同,每个人都喜欢感觉良好,但是他们在是什么让他们感觉良好上大为不同。</p>
-<p>那会不会在随着时间推移中改变一个人的性格呢?</p>
-<p>我想多多少少在表面上是会改变的。一个人或多或少会受外界的影响,孟母尚有三迁,但若说完全涉及本性, 可能改变不大。影响的因素很多。许多内向的人会逐渐变得外向,可能是朋友的干涉或者生活的改变,但就我而言,有时候我还是一个内向的人,我隐隐觉得这种改变只是因为生活中出现了某种奇妙的变故,我会觉得自己正在享受另一种风格的生活,别人觉得我是一个外向开朗的人。但是我发现自己还是一如既往的,需要一个人安静地获得精力,还是迫于大型的活动,还是喜欢过着慢节奏的生活。</p>
-<p>这本书大部分是作者在阐述她自己的故事,还有许多期间她所研究过的从病理和实际上共同去考虑的分析, 还涉及到婚姻关系、为人父母包括养育性格内向的孩子、社交活动和工作。</p>
-<p>懒懒散散写了这么多,其实自己也不知道写了些什么,也就这么边读边写下来了。</p>
-<p>其实我和大多数人一样,有时候很想做个心理学家,只不过在阴差阳错间,在生活所迫,在性格诱使,在碎碎念间从事了另一项工作。</p>
+        <span itemprop="articleBody"><p>InlineHook 简单来说就是在要hook的函数开头强制改变程序执行流程，让它先去执行我的自定义函数，再判断需要干什么事情。常见的是嵌入jmp指令来改变执行流程。而此例子是使用push 地址 ret来<br>改变执行流程。可以免去计算偏移量。。。不过建议使用jmp来，不然有可能增加手动重定位的麻烦…..代码如下：<br>&lt;—!more—&gt;<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#39318;&#20808;&#24471;&#21040;ExitProcess&#20989;&#25968;&#30340;&#22320;&#22336;&#65292;&#19981;&#36807;&#25105;&#20204;&#19981;&#33021;&#30452;&#25509;&#23601;&#21435;&#20462;&#25913;&#23427;&#24320;&#22836;&#30340;&#23383;&#33410;&#65292;&#22240;&#20026;&#36825;&#20010;&#39029;&#38754;&#26159;&#23646;&#20110;&#20195;&#30721;&#39029;&#65292;&#19968;&#33324;&#30340;&#23646;&#24615;&#26159;&#19981;&#21487;&#20889;&#30340;&#65292;&#25152;&#20197;&#10;&#20808;&#20462;&#25913;&#39029;&#23646;&#24615;&#65292;&#28982;&#21518;&#23601;&#21487;&#20197;&#20462;&#25913;&#20102;&#65292;&#26368;&#21518;&#25105;&#20204;&#35843;&#29992;&#36825;&#20010;&#20989;&#25968;&#65292;&#21487;&#20197;&#30475;&#21040;&#25928;&#26524;&#12290;&#10;  &#31616;&#21333;&#23454;&#29616;&#65306;&#10;  .386&#10;    .model flat,stdcall&#10;    option casemap:none&#10;&#10;include    \masm32\include\windows.inc&#10;include    \masm32\include\user32.inc&#10;includelib \masm32\lib\user32.lib&#10;include    \masm32\include\kernel32.inc&#10;includelib \masm32\lib\kernel32.lib&#10;&#10;;&#25968;&#25454;&#27573;&#10;    .data&#10;    ;reservebytes db 10h dup(090h) &#26412;&#26469;&#26159;&#20934;&#22791;hook&#23436;&#20102;&#20877;&#25913;&#22238;&#21435;&#30340;&#65292;&#20294;&#26159;&#25042;&#24471;&#20889;&#20102;&#65292;&#33021;&#20570;&#28436;&#31034;&#20316;&#29992;&#36275;&#22815;&#20102;&#10;    kernel32dll db &#34;kernel32.dll&#34;,0h&#10;    hkernel32 dd 0h&#10;    exitprocessname db &#34;ExitProcess&#34;,0h&#10;    hexitprocess dd 0h&#10;    sztext db &#34;&#20320;&#20197;&#20026;&#28857;&#30830;&#23450;&#23601;&#21487;&#20197;&#36864;&#20986;&#65311;&#34;,0h&#10;    sztitle db &#34;hooked&#34; , 0h&#10;    errortext db &#34;error&#34;,0h&#10;    errortitle db &#34;error&#34;,0h&#10;    oldprotect dd 0h&#10;;&#25968;&#25454;&#27573;?&#10;    .data?&#10;  &#10;&#10;;&#20195;&#30721;&#27573;&#10;    .code&#10;    newexitprocess proc p1:dword&#10;    invoke MessageBoxA,NULL,addr sztext,addr sztitle,MB_OK&#10;    newexitprocess endp&#10;start:&#10;  main proc&#10;  invoke GetModuleHandle,addr kernel32dll&#10;  invoke GetProcAddress , eax , addr exitprocessname&#10;  mov hexitprocess,eax&#10;  invoke VirtualProtect,eax,2h,PAGE_EXECUTE_READWRITE,addr oldprotect&#10;  test eax,eax&#10;  jz fuck&#10;  lea eax,newexitprocess&#10;  call overtrash&#10;  push eax&#10;  ret&#10;  overtrash:&#10;  pop esi&#10;  mov edi,hexitprocess&#10;  movsw&#10;  invoke ExitProcess,NULL&#10;  jmp overfuck&#10;  fuck:&#10;    invoke MessageBoxA,NULL,addr errortext,addr errortitle,MB_OK&#10;  overfuck:&#10;  ret&#10;  main endp&#10;end start</span><br></pre></td></tr></table></figure></p>
+<p>覆盖了几个字节，读者看得懂的就好。</p>
 </span>
       
     </div>
@@ -225,7 +207,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活感悟/" rel="tag">#生活感悟</a>
+            <a href="/tags/Win32-ASM/" rel="tag">#Win32 ASM</a>
           
         </div>
       
@@ -234,13 +216,11 @@
         <div class="post-nav">
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/10/15/Java-work/" rel="prev">Java work</a>
-            
           </div>
 
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/03/My-备忘/" rel="next">My 备忘</a>
+              <a href="/2015/10/26/Python-urllib2/" rel="next">Python urllib2</a>
             
           </div>
         </div>
